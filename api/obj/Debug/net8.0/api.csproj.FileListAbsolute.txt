@@ -38,3 +38,4 @@ C:\Users\vasil\OneDrive\Coding\NOIT_Cars\NOIT\api\bin\Debug\net8.0\System.Text.E
 C:\Users\vasil\OneDrive\Coding\NOIT_Cars\NOIT\api\bin\Debug\net8.0\System.Text.Json.dll
 C:\Users\vasil\OneDrive\Coding\NOIT_Cars\NOIT\api\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 C:\Users\vasil\OneDrive\Coding\NOIT_Cars\NOIT\api\bin\Debug\net8.0\scrapedData.json
+C:\Users\vasil\OneDrive\Coding\NOIT_Cars\NOIT\api\bin\Debug\net8.0\debug_info.json
