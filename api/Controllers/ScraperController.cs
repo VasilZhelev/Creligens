@@ -16,7 +16,6 @@ namespace api.Controllers
             _scraperService = scraperService;
         }
 
-        // Change from [FromBody] to [FromQuery] for Swagger UI input field
         [HttpGet("scrape")]
         public async Task<IActionResult> Scrape([FromQuery] string url)
         {
@@ -29,7 +28,6 @@ namespace api.Controllers
             {
                 var data = await _scraperService.ScrapeCarDataAsync(url);
                 await _scraperService.SaveDataToJsonAsync(data, "scrapedData.json");
-
                 return Ok(data);
             }
             catch (Exception ex)
@@ -37,10 +35,5 @@ namespace api.Controllers
                 return BadRequest($"Error occurred: {ex.Message}");
             }
         }
-    }
-
-    public class ScrapeRequest
-    {
-        public string Url { get; set; }
     }
 }

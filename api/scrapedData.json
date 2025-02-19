@@ -1,7 +1,19 @@
 ﻿{
-  "Title": "Alfa Romeo Stelvio AWD : 21738940847470957",
-  "Year": "",
-  "Price": "32 000 .",
-  "Location": "",
-  "ScrapedAt": "2025-02-11T14:10:06.0840751Z"
+  "Title": "Audi A8",
+  "Year": "2016",
+  "Price": "25500",
+  "PhotoUrls": [
+    "https://cdn2.focus.bg/mobile/photosorg/843/1/big/11739969850572843_7S.webp",
+    "https://cdn2.focus.bg/mobile/photosorg/843/1/big/11739969850572843_Cn.webp",
+    "https://cdn2.focus.bg/mobile/photosorg/843/1/big/11739969850572843_61.webp",
+    "https://cdn2.focus.bg/mobile/photosorg/843/1/big/11739969850572843_LI.webp",
+    "https://cdn2.focus.bg/mobile/photosorg/843/1/big/11739969850572843_Se.webp",
+    "https://cdn2.focus.bg/mobile/photosorg/843/1/big/11739969850572843_hZ.webp",
+    "https://cdn2.focus.bg/mobile/photosorg/843/1/big/11739969850572843_QZ.webp",
+    "https://cdn2.focus.bg/mobile/photosorg/843/1/big/11739969850572843_FM.webp",
+    "https://cdn2.focus.bg/mobile/photosorg/843/1/big/11739969850572843_IP.webp",
+    "https://cdn2.focus.bg/mobile/photosorg/843/1/big/11739969850572843_Q6.webp",
+    "https://cdn2.focus.bg/mobile/photosorg/843/1/big/11739969850572843_dd.webp"
+  ],
+  "ScrapedAt": "2025-02-19T20:00:28.2981452Z"
 }
