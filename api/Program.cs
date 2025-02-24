@@ -3,31 +3,35 @@ using api.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Register services for web scraping
-builder.Services.AddSingleton<WebScraperService>(); // WebScraperService registration
-builder.Services.AddHttpClient(); // HttpClient for scraping
+builder.Services.AddSingleton<WebScraperService>();
+builder.Services.AddHttpClient();
 
 // Add controllers to the container
-builder.Services.AddControllers(); // Register controllers
+builder.Services.AddControllers();
 
-// Register Swagger for API documentation (optional)
+// Add Swagger services
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen();  // Make sure this line is here
 
 var app = builder.Build();
 
-// Swagger setup
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI(); // Swagger UI for easy testing
-}
+// Swagger setup (for development environment)
+// if (app.Environment.IsDevelopment())
+// {
+//     app.UseSwagger();
+//     app.UseSwaggerUI(); // Swagger UI for testing
+// }
+
+app.UseSwagger();
+app.UseSwaggerUI(); // Swagger UI for testing
 
 app.UseHttpsRedirection();
 
-// Map API controllers
-app.MapControllers(); // Ensure controllers are properly mapped
+// Map controllers (make sure API controllers are properly registered)
+app.MapControllers();
 
-app.MapGet("/", () => "Hello from Creligens API!");
+// Health check and redirect to Swagger
+app.MapGet("/", () => Results.Redirect("/swagger"));
 app.MapGet("/health", () => Results.Ok("Healthy"));
 
-app.Run(); // Run the app
+app.Run();
