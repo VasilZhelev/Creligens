@@ -4,4 +4,4 @@ services:
     env: dotnet
     rootDir: api
     buildCommand: "dotnet publish -c Release -o out"
-    startCommand: "dotnet out/YourApi.dll"
+    startCommand: "dotnet out/api.dll"
