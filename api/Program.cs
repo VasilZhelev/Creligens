@@ -27,4 +27,7 @@ app.UseHttpsRedirection();
 // Map API controllers
 app.MapControllers(); // Ensure controllers are properly mapped
 
+app.MapGet("/", () => "Hello from Creligens API!");
+app.MapGet("/health", () => Results.Ok("Healthy"));
+
 app.Run(); // Run the app
