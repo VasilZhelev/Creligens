@@ -718,11 +718,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\vasil\\OneDrive\\Coding\\NOIT_Cars\\NOIT\\api\\api.csproj",
+      "projectUniqueName": "C:\\Users\\vasil\\OneDrive\\Coding\\NOIT_Cars\\Creligens\\api\\api.csproj",
       "projectName": "api",
-      "projectPath": "C:\\Users\\vasil\\OneDrive\\Coding\\NOIT_Cars\\NOIT\\api\\api.csproj",
+      "projectPath": "C:\\Users\\vasil\\OneDrive\\Coding\\NOIT_Cars\\Creligens\\api\\api.csproj",
       "packagesPath": "C:\\Users\\vasil\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\vasil\\OneDrive\\Coding\\NOIT_Cars\\NOIT\\api\\obj\\",
+      "outputPath": "C:\\Users\\vasil\\OneDrive\\Coding\\NOIT_Cars\\Creligens\\api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\vasil\\AppData\\Roaming\\NuGet\\NuGet.Config"
