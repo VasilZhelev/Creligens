@@ -9,3 +9,4 @@ api/obj/project.nuget.cache
 api/obj/Debug/net8.0/api.GeneratedMSBuildEditorConfig.editorconfig
 api/obj/Debug/net8.0/api.assets.cache
 api/creligens-firebase-adminsdk-fbsvc-42ca7744ef.json
+api/obj/api.csproj.nuget.dgspec.json
