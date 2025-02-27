@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Firebase Token Test</title>
+  <!-- Include Firebase libraries from the CDN -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+</head>
+<body>
+  <h1>Firebase Token Test</h1>
+  <p>Enter your email and password to sign in and get a token.</p>
+  <input type="email" id="email" placeholder="Enter email"><br>
+  <input type="password" id="password" placeholder="Enter password"><br>
+  <button onclick="signIn()">Sign In</button>
+  <h3>Your Token:</h3>
+  <pre id="tokenOutput" style="background:#f4f4f4; padding:10px;"></pre>
+  
+  <script>
+    // Your Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAl2fBYiXlf5i7RHUAvaWmnHvV9LKd5bPE",
+      authDomain: "creligens.firebaseapp.com",
+      projectId: "creligens",
+      // You can add other config values if needed.
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    function signIn() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      
+      firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          // Get the JWT token from the signed-in user.
+          userCredential.user.getIdToken()
+            .then((token) => {
+              document.getElementById('tokenOutput').innerText = token;
+            })
+            .catch((error) => {
+              document.getElementById('tokenOutput').innerText = "Error getting token: " + error.message;
+            });
+        })
+        .catch((error) => {
+          document.getElementById('tokenOutput').innerText = "Sign-in error: " + error.message;
+        });
+    }
+  </script>
+</body>
+</html>
