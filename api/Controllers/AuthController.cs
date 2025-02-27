@@ -3,6 +3,7 @@ using FirebaseAdmin.Auth;
 using System.Threading.Tasks;
 using System;
 using System.Collections.Generic;
+using api.Services;
 
 namespace api.Controllers
 {
@@ -13,7 +14,7 @@ namespace api.Controllers
         private readonly ILogger<AuthController> _logger;
         private readonly IEmailService _emailService;
 
-        public AuthController(ILogger<AuthController> logger)
+        public AuthController(ILogger<AuthController> logger, IEmailService emailService)
         {
             _logger = logger;
             _emailService = emailService;
