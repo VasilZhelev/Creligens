@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using api.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace api.Controllers
 {
@@ -17,6 +18,7 @@ namespace api.Controllers
         }
 
         [HttpGet("scrape")]
+        [Authorize]
         public async Task<IActionResult> Scrape([FromQuery] string url)
         {
             if (string.IsNullOrWhiteSpace(url))

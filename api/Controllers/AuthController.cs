@@ -11,10 +11,12 @@ namespace api.Controllers
     public class AuthController : ControllerBase
     {
         private readonly ILogger<AuthController> _logger;
+        private readonly IEmailService _emailService;
 
         public AuthController(ILogger<AuthController> logger)
         {
             _logger = logger;
+            _emailService = emailService;
         }
 
         [HttpPost("signup")]
@@ -52,7 +54,7 @@ namespace api.Controllers
                 await FirebaseAuth.DefaultInstance.SetCustomUserClaimsAsync(userRecord.Uid, claims);
 
                 // Here you would send the verification email (we'll create this service later)
-                // await _emailService.SendVerificationEmail(request.Email, verificationCode);
+                await _emailService.SendVerificationEmail(request.Email, verificationCode);
 
                 return Ok(new { 
                     Message = "User created successfully. Verification email has been sent.",
@@ -207,7 +209,7 @@ namespace api.Controllers
                 await FirebaseAuth.DefaultInstance.SetCustomUserClaimsAsync(userRecord.Uid, claims);
                 
                 // Here you would send the verification email
-                // await _emailService.SendVerificationEmail(request.Email, verificationCode);
+                await _emailService.SendVerificationEmail(request.Email, verificationCode);
                 
                 return Ok(new { 
                     Message = "Verification email has been resent",
@@ -249,7 +251,7 @@ namespace api.Controllers
                 await FirebaseAuth.DefaultInstance.SetCustomUserClaimsAsync(userRecord.Uid, claims);
                 
                 // Here you would send the password reset email
-                // await _emailService.SendPasswordResetEmail(request.Email, resetCode);
+                await _emailService.SendPasswordResetEmail(request.Email, resetCode);
                 
                 return Ok(new { 
                     Message = "Password reset instructions have been sent to your email",
