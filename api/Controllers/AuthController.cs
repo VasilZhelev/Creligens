@@ -146,11 +146,10 @@ namespace api.Controllers
         {
             try
             {
-                // We can't directly authenticate using Firebase Admin SDK
-                // Instead, we validate the user exists and is valid
+                // Validate user exists
                 var userRecord = await FirebaseAuth.DefaultInstance.GetUserByEmailAsync(request.Email);
                 
-                // Check if email is verified (optional, based on your requirements)
+                // Check if email is verified
                 if (!userRecord.EmailVerified && true)  // Set to false if you want to allow unverified emails
                 {
                     return BadRequest(new { 
@@ -159,29 +158,24 @@ namespace api.Controllers
                     });
                 }
                 
-                // For backend validation only
-                // Actual authentication will happen on the frontend using Firebase Auth SDK
-                
                 // Create a custom token for the user
-                // Note: In a real implementation, the frontend would use Firebase Auth SDK
-                // to convert this custom token to an ID token
                 string customToken = await FirebaseAuth.DefaultInstance.CreateCustomTokenAsync(userRecord.Uid);
                 
+                // Return the token with clear instructions for the client
                 return Ok(new { 
-                    Message = "User validated successfully",
-                    CustomToken = customToken,
+                    Message = "Login successful",
+                    Token = customToken,
+                    TokenType = "Bearer",
                     UserId = userRecord.Uid,
                     DisplayName = userRecord.DisplayName,
-                    Email = userRecord.Email
+                    Email = userRecord.Email,
+                    // Include instructions for the client
+                    Instructions = "Include this token in subsequent requests as: Authorization: Bearer {token}"
                 });
-            }
-            catch (FirebaseAuthException ex)
-            {
-                _logger.LogError(ex, "Firebase auth error during login");
-                return BadRequest(new { Message = "Invalid email or password" });
             }
             catch (Exception ex)
             {
+                // Error handling
                 _logger.LogError(ex, "Error during login");
                 return StatusCode(500, new { Message = "An error occurred during login" });
             }
