@@ -60,12 +60,26 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddSingleton(provider => FirestoreDb.Create(firebaseProjectId));
 
 // === Register Additional Services ===
+// Email Service
+builder.Services.AddSingleton<IEmailService, EmailService>();
+
 // Example: a custom web scraping service
 builder.Services.AddSingleton<WebScraperService>();
 builder.Services.AddHttpClient();
 
 // Add controllers.
 builder.Services.AddControllers();
+
+// Add CORS for development
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
 
 // Add Swagger services.
 builder.Services.AddEndpointsApiExplorer();
@@ -103,7 +117,6 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-
 var app = builder.Build();
 
 // === Middleware Pipeline ===
@@ -111,6 +124,9 @@ var app = builder.Build();
 // Enable Swagger and Swagger UI.
 app.UseSwagger();
 app.UseSwaggerUI();
+
+// Apply CORS policy
+app.UseCors("AllowAll");
 
 // Redirect HTTP to HTTPS.
 app.UseHttpsRedirection();
