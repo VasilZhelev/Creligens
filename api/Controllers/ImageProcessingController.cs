@@ -1,24 +1,26 @@
+using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Net.Http.Json;
-using Microsoft.AspNetCore.Mvc;
 
-namespace api.Controllers
+namespace ImageProcessingApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     public class ImageProcessingController : ControllerBase
     {
         private readonly HttpClient _httpClient;
-        // Replace with your actual Roboflow model endpoint and API key
-        private readonly string _roboflowModelUrl = "https://detect.roboflow.com/your-project/your-model";
-        private readonly string _roboflowApiKey = "YOUR_ROBOFLOW_API_KEY";
+        private readonly string _roboflowApiKey;
+        // Set your Roboflow model URL (update with your actual project/model)
+        private readonly string _roboflowModelUrl = "https://detect.roboflow.com/car_damage_detection_main_-f10/1";
 
-        public ImageProcessingController(IHttpClientFactory httpClientFactory)
+        // The constructor now accepts IConfiguration, which gives access to environment variables.
+        public ImageProcessingController(IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
             _httpClient = httpClientFactory.CreateClient();
+            _roboflowApiKey = configuration["ROBOFLOW_API_KEY"]; // Retrieve the API key
         }
 
-        // POST api/ImageProcessing/process-images
+        // POST: api/ImageProcessing/process-images
         [HttpPost("process-images")]
         public async Task<IActionResult> ProcessImages([FromBody] List<string> imageUrls)
         {
@@ -31,18 +33,12 @@ namespace api.Controllers
 
             foreach (var imageUrl in imageUrls)
             {
-                // Build the request URL for Roboflow.
-                // Roboflow’s API typically accepts the image (or its URL) along with your API key.
                 var requestUrl = $"{_roboflowModelUrl}?api_key={_roboflowApiKey}&image={WebUtility.UrlEncode(imageUrl)}";
-
                 try
                 {
-                    // Send GET request to Roboflow API.
                     var response = await _httpClient.GetAsync(requestUrl);
                     if (response.IsSuccessStatusCode)
                     {
-                        // Assume the response is in JSON format.
-                        // Define RoboflowResponse to match the returned JSON structure.
                         var roboflowResult = await response.Content.ReadFromJsonAsync<RoboflowResponse>();
                         results.Add(new
                         {
@@ -61,7 +57,6 @@ namespace api.Controllers
                 }
                 catch (Exception ex)
                 {
-                    // Log exception details here if needed.
                     results.Add(new
                     {
                         ImageUrl = imageUrl,
@@ -69,17 +64,14 @@ namespace api.Controllers
                     });
                 }
             }
-
             return Ok(results);
         }
     }
 
-    // Define this class based on the Roboflow API response structure.
-    // Common properties might include predictions, confidence, bounding box coordinates, etc.
+    // Define classes to map the Roboflow API response
     public class RoboflowResponse
     {
         public List<Prediction> Predictions { get; set; }
-        // You might get a URL for an annotated image, or additional metadata.
         public string AnnotatedImage { get; set; }
     }
 
