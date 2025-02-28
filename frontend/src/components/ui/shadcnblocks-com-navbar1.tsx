@@ -141,7 +141,7 @@ const Navbar1 = ({
     { name: "Sitemap", url: "#" },
   ],
   auth = {
-    login: { text: "Log in", url: "#" },
+    login: { text: "Log in", url: "@/components/ui/logInDemo.tsx" },
     signup: { text: "Sign up", url: "#" },
   },
 }: Navbar1Props) => {
