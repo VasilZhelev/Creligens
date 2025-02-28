@@ -7,8 +7,8 @@ using Google.Cloud.Firestore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// === Firebase Setup ===
-var firebaseProjectId = "creligens";
+// === Firebase Setup === //
+var firebaseProjectId = "creligens"; 
 
 // Try to load Firebase service account credentials from an environment variable (for production on Render)
 var firebaseServiceAccountJson = Environment.GetEnvironmentVariable("FIREBASE_SERVICE_ACCOUNT_JSON");
