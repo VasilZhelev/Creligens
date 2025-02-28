@@ -142,7 +142,7 @@ const Navbar1 = ({
   ],
   auth = {
     login: { text: "Log in", url: "@/components/ui/logInDemo.tsx" },
-    signup: { text: "Sign up", url: "#" },
+    signup: { text: "Sign up", url: "@/components/ui/singUpDemo.tsx" },
   },
 }: Navbar1Props) => {
   return (

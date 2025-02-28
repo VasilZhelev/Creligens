@@ -4,11 +4,8 @@ import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-van
 
 export function TextLink() {
   const placeholders = [
-    "What's the first rule of Fight Club?",
-    "Who is Tyler Durden?",
-    "Where is Andrew Laeddis Hiding?",
-    "Write a Javascript method to reverse a string",
-    "How to assemble your own PC?",
+    "https://www.mobile.bg",
+    "Place your link here",
   ];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
