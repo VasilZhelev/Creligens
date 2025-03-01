@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router';
 import Index from '@/routes/Index';
 
+
 export default function App() {
     return <>
         <BrowserRouter>

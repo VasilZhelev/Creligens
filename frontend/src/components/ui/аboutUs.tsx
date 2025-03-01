@@ -21,7 +21,7 @@ const features = [
   },
 ]
 
-export function FeatureStepsDemo() {
+export function AboutUs() {
   return (
       <FeatureSteps 
         features={features}
