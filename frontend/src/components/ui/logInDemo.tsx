@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useId } from "react";
 
-function Component() {
+function Component1() {
   const id = useId();
   return (
     <Dialog>
@@ -86,4 +86,4 @@ function Component() {
   );
 }
 
-export { Component };
+export { Component1 };

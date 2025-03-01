@@ -1,5 +1,5 @@
 import { Book, Menu, Sunset, Trees, Zap } from "lucide-react";
-
+import { Link } from 'react-router-dom'; // Import Link
 import {
   Accordion,
   AccordionContent,
@@ -141,8 +141,8 @@ const Navbar1 = ({
     { name: "Sitemap", url: "#" },
   ],
   auth = {
-    login: { text: "Log in", url: "@/components/ui/logInDemo" },
-    signup: { text: "Sign up", url: "@/components/ui/singUpDemo" },
+    login: { text: "Log in", url: "/login" }, // Updated URL
+    signup: { text: "Sign up", url: "/signup" }, // Updated URL
   },
 }: Navbar1Props) => {
   return (
@@ -164,10 +164,10 @@ const Navbar1 = ({
           </div>
           <div className="flex gap-2">
             <Button asChild variant="outline" size="sm">
-              <a href={auth.login.url}>{auth.login.text}</a>
+              <Link to={auth.login.url}>{auth.login.text}</Link> {/* Use Link for Log In */}
             </Button>
             <Button asChild size="sm">
-              <a href={auth.signup.url}>{auth.signup.text}</a>
+              <Link to={auth.signup.url}>{auth.signup.text}</Link> {/* Use Link for Sign Up */}
             </Button>
           </div>
         </nav>
@@ -217,10 +217,10 @@ const Navbar1 = ({
                   </div>
                   <div className="flex flex-col gap-3">
                     <Button asChild variant="outline">
-                      <a href={auth.login.url}>{auth.login.text}</a>
+                      <Link to={auth.login.url}>{auth.login.text}</Link> {/* Use Link for Log In */}
                     </Button>
                     <Button asChild>
-                      <a href={auth.signup.url}>{auth.signup.text}</a>
+                      <Link to={auth.signup.url}>{auth.signup.text}</Link> {/* Use Link for Sign Up */}
                     </Button>
                   </div>
                 </div>
