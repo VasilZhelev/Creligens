@@ -1,5 +1,6 @@
+import { useState } from "react"; // Add this import
 import { Book, Menu, Sunset, Trees, Zap } from "lucide-react";
-import { Link } from 'react-router-dom'; // Import Link
+import { Link } from "react-router-dom"; // Import Link
 import {
   Accordion,
   AccordionContent,
@@ -43,16 +44,6 @@ interface Navbar1Props {
     name: string;
     url: string;
   }[];
-  auth?: {
-    login: {
-      text: string;
-      url: string;
-    };
-    signup: {
-      text: string;
-      url: string;
-    };
-  };
 }
 
 const Navbar1 = ({
@@ -140,11 +131,9 @@ const Navbar1 = ({
     { name: "Imprint", url: "#" },
     { name: "Sitemap", url: "#" },
   ],
-  auth = {
-    login: { text: "Log in", url: "/login" }, // Updated URL
-    signup: { text: "Sign up", url: "/signup" }, // Updated URL
-  },
 }: Navbar1Props) => {
+  const [token, setToken] = useState<string | null>(null); // Simulate authentication state
+
   return (
     <section className="py-4">
       <div className="container">
@@ -163,12 +152,20 @@ const Navbar1 = ({
             </div>
           </div>
           <div className="flex gap-2">
-            <Button asChild variant="outline" size="sm">
-              <Link to={auth.login.url}>{auth.login.text}</Link> {/* Use Link for Log In */}
-            </Button>
-            <Button asChild size="sm">
-              <Link to={auth.signup.url}>{auth.signup.text}</Link> {/* Use Link for Sign Up */}
-            </Button>
+            {token == null ? ( // If user is not logged in
+              <>
+                <Button asChild variant="outline" size="sm">
+                  <Link to="/login">Sign in</Link> {/* Link to Sign In */}
+                </Button>
+                <Button asChild size="sm">
+                  <Link to="/signup">Sign up</Link> {/* Link to Sign Up */}
+                </Button>
+              </>
+            ) : ( // If user is logged in
+              <Button asChild size="sm">
+                <Link to="/arrays">Dashboard</Link> {/* Link to Dashboard */}
+              </Button>
+            )}
           </div>
         </nav>
         <div className="block lg:hidden">
@@ -216,12 +213,20 @@ const Navbar1 = ({
                     </div>
                   </div>
                   <div className="flex flex-col gap-3">
-                    <Button asChild variant="outline">
-                      <Link to={auth.login.url}>{auth.login.text}</Link> {/* Use Link for Log In */}
-                    </Button>
-                    <Button asChild>
-                      <Link to={auth.signup.url}>{auth.signup.text}</Link> {/* Use Link for Sign Up */}
-                    </Button>
+                    {token == null ? ( // If user is not logged in
+                      <>
+                        <Button asChild variant="outline">
+                          <Link to="/login">Sign in</Link> {/* Link to Sign In */}
+                        </Button>
+                        <Button asChild>
+                          <Link to="/signup">Sign up</Link> {/* Link to Sign Up */}
+                        </Button>
+                      </>
+                    ) : ( // If user is logged in
+                      <Button asChild>
+                        <Link to="/arrays">Dashboard</Link> {/* Link to Dashboard */}
+                      </Button>
+                    )}
                   </div>
                 </div>
               </SheetContent>
