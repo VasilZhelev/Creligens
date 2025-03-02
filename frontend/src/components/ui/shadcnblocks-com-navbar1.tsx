@@ -163,7 +163,6 @@ const Navbar1 = ({
               </>
             ) : ( // If user is logged in
               <Button asChild size="sm">
-                <Link to="/arrays">Dashboard</Link> {/* Link to Dashboard */}
               </Button>
             )}
           </div>
