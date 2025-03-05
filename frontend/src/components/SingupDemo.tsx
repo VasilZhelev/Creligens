@@ -1,12 +1,4 @@
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useId } from "react";
@@ -14,11 +6,8 @@ import { useId } from "react";
 function SingupDemo() {
   const id = useId();
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="outline">Sign up</Button>
-      </DialogTrigger>
-      <DialogContent>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-background p-4">
+      <div className="w-full max-w-md space-y-6">
         <div className="flex flex-col items-center gap-2">
           <div
             className="flex size-11 shrink-0 items-center justify-center rounded-full border border-border"
@@ -35,12 +24,12 @@ function SingupDemo() {
               <circle cx="16" cy="16" r="12" fill="none" strokeWidth="8" />
             </svg>
           </div>
-          <DialogHeader>
-            <DialogTitle className="sm:text-center">Sign up Origin UI</DialogTitle>
-            <DialogDescription className="sm:text-center">
+          <div className="text-center">
+            <h1 className="text-2xl font-semibold">Sign up Origin UI</h1>
+            <p className="text-muted-foreground">
               We just need a few details to get you started.
-            </DialogDescription>
-          </DialogHeader>
+            </p>
+          </div>
         </div>
 
         <form className="space-y-5">
@@ -63,7 +52,7 @@ function SingupDemo() {
               />
             </div>
           </div>
-          <Button type="button" className="w-full">
+          <Button type="submit" className="w-full">
             Sign up
           </Button>
         </form>
@@ -72,7 +61,9 @@ function SingupDemo() {
           <span className="text-xs text-muted-foreground">Or</span>
         </div>
 
-        <Button variant="outline">Continue with Google</Button>
+        <Button variant="outline" className="w-full">
+          Continue with Google
+        </Button>
 
         <p className="text-center text-xs text-muted-foreground">
           By signing up you agree to our{" "}
@@ -81,8 +72,8 @@ function SingupDemo() {
           </a>
           .
         </p>
-      </DialogContent>
-    </Dialog>
+      </div>
+    </div>
   );
 }
 
