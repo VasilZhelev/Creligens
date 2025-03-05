@@ -1,5 +1,4 @@
 import { Book, Menu, Sunset, Trees, Zap } from "lucide-react";
-
 import {
   Accordion,
   AccordionContent,
@@ -58,7 +57,7 @@ interface Navbar1Props {
 const Navbar1 = ({
   logo = {
     url: "https://www.shadcnblocks.com",
-    src: "/Smart (2) (1) (1).png", // Path to the image in the public folder
+    src: "/Smart (2) (1) (1).png",
     alt: "logo",
     title: "",
   },
@@ -141,8 +140,8 @@ const Navbar1 = ({
     { name: "Sitemap", url: "#" },
   ],
   auth = {
-    login: { text: "Log in", url: "@/components/ui/logInDemo" },
-    signup: { text: "Sign up", url: "@/components/ui/singUpDemo" },
+    login: { text: "Log in", url: "/login" },
+    signup: { text: "Sign up", url: "/singup" }, // Updated to "/singup"
   },
 }: Navbar1Props) => {
   return (
@@ -151,7 +150,7 @@ const Navbar1 = ({
         <nav className="hidden justify-between lg:flex">
           <div className="flex items-center gap-6">
             <a href={logo.url} className="flex items-center gap-2">
-              <img src={logo.src} className="w-32" alt={logo.alt} /> {/* Updated */}
+              <img src={logo.src} className="w-32" alt={logo.alt} />
               <span className="text-lg font-semibold">{logo.title}</span>
             </a>
             <div className="flex items-center">
@@ -174,7 +173,7 @@ const Navbar1 = ({
         <div className="block lg:hidden">
           <div className="flex items-center justify-between">
             <a href={logo.url} className="flex items-center gap-2">
-              <img src={logo.src} className="w-32" alt={logo.alt} /> {/* Updated */}
+              <img src={logo.src} className="w-32" alt={logo.alt} />
               <span className="text-lg font-semibold">{logo.title}</span>
             </a>
             <Sheet>
@@ -187,7 +186,7 @@ const Navbar1 = ({
                 <SheetHeader>
                   <SheetTitle>
                     <a href={logo.url} className="flex items-center gap-2">
-                      <img src={logo.src} className="w-32" alt={logo.alt} /> {/* Updated */}
+                      <img src={logo.src} className="w-32" alt={logo.alt} />
                       <span className="text-lg font-semibold">
                         {logo.title}
                       </span>

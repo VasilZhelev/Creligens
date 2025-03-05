@@ -1,15 +1,16 @@
-import { BrowserRouter, Routes, Route } from 'react-router';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Index from '@/routes/Index';
-import Component from '@/components/ui/logInDemo'
-
+import { LoginDemo } from '@/components/LoginDemo';
+import { SingupDemo } from '@/components/SingupDemo';
 
 export default function App() {
-    return <>
+    return (
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Index />} />
-                <Route path="/" element={<Component />} />
+                <Route path="/login" element={<LoginDemo />} />
+                <Route path="/singup" element={<SingupDemo />} />
             </Routes>
         </BrowserRouter>
-    </>;
+    );
 }
