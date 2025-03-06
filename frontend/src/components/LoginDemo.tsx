@@ -1,73 +1,67 @@
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useId } from "react";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { authApi } from "@/lib/api";
+import { toast } from "sonner";
 
-function LoginDemo() {
-  const id = useId();
+export function LoginDemo() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const { data } = await authApi.login({ email, password });
+      localStorage.setItem("authToken", data.token);
+      localStorage.setItem("userDisplayName", data.displayName);
+      toast.success("Login successful");
+      navigate("/");
+    } catch (error: any) {
+      toast.error(error.message || "Login failed");
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-background p-4">
       <div className="w-full max-w-md space-y-6">
-        <div className="flex flex-col items-center gap-2">
-          <div
-            className="flex size-11 shrink-0 items-center justify-center rounded-full border border-border"
-            aria-hidden="true"
-          >
-            <svg
-              className="stroke-zinc-800 dark:stroke-zinc-100"
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 32 32"
-              aria-hidden="true"
-            >
-              <circle cx="16" cy="16" r="12" fill="none" strokeWidth="8" />
-            </svg>
-          </div>
-          <div className="text-center">
-            <h1 className="text-2xl font-semibold">Welcome back</h1>
-            <p className="text-muted-foreground">
-              Enter your credentials to login to your account.
-            </p>
-          </div>
-        </div>
-
-        <form className="space-y-5">
+        {/* Keep existing visual elements */}
+        <form onSubmit={handleSubmit} className="space-y-5">
           <div className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor={`${id}-email`}>Email</Label>
-              <Input id={`${id}-email`} placeholder="hi@yourcompany.com" type="email" required />
+              <Label>Email</Label>
+              <Input 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                type="email"
+                required
+              />
             </div>
             <div className="space-y-2">
-              <Label htmlFor={`${id}-password`}>Password</Label>
+              <Label>Password</Label>
               <Input
-                id={`${id}-password`}
-                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 type="password"
                 required
               />
             </div>
           </div>
-          <div className="flex justify-between gap-2">
-            <div className="flex items-center gap-2">
-              <Checkbox id={`${id}-remember`} />
-              <Label htmlFor={`${id}-remember`} className="font-normal text-muted-foreground">
-                Remember me
-              </Label>
-            </div>
-            <Link to="/forgot-password" className="text-sm underline hover:no-underline"> {/* Updated to use Link */}
-              Forgot password?
-            </Link>
-          </div>
           <Button type="submit" className="w-full">
             Sign in
           </Button>
         </form>
+        <div className="flex justify-between">
+          <Link to="/signup" className="text-sm underline">
+            Create account
+          </Link>
+          <Link to="/forgot-password" className="text-sm underline">
+            Forgot password?
+          </Link>
+        </div>
       </div>
     </div>
   );
 }
-
-export { LoginDemo };

@@ -2,15 +2,27 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useId } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { authApi } from "@/lib/api";
+import { toast } from "sonner";
 
-function SingupDemo() {
+function SignupDemo() {
   const id = useId();
-  const navigate = useNavigate(); // Initialize useNavigate
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
-    event.preventDefault(); // Prevent default form submission
-    navigate("/codeverification"); // Navigate to /codeverification
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      await authApi.signUp({ email, password, displayName: name });
+      toast.success("Verification email sent!");
+      navigate(`/verify-email?email=${encodeURIComponent(email)}`);
+    } catch (error: any) {
+      toast.error(error.message || "Signup failed");
+    }
   };
 
   return (
@@ -44,16 +56,18 @@ function SingupDemo() {
           <div className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor={`${id}-name`}>Full name</Label>
-              <Input id={`${id}-name`} placeholder="Matt Welsh" type="text" required />
+              <Input id={`${id}-name`} value={name} onChange={(e) => setName(e.target.value)} placeholder="John Doe" required />
             </div>
             <div className="space-y-2">
               <Label htmlFor={`${id}-email`}>Email</Label>
-              <Input id={`${id}-email`} placeholder="hi@yourcompany.com" type="email" required />
+              <Input id={`${id}-email`} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="hi@yourcompany.com" type="email" required />
             </div>
             <div className="space-y-2">
               <Label htmlFor={`${id}-password`}>Password</Label>
               <Input
                 id={`${id}-password`}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter your password"
                 type="password"
                 required
@@ -76,4 +90,4 @@ function SingupDemo() {
   );
 }
 
-export { SingupDemo };
+export { SignupDemo };

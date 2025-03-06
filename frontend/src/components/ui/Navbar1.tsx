@@ -21,6 +21,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { useNavigate } from "react-router-dom";
 
 interface MenuItem {
   title: string;
@@ -141,9 +142,19 @@ const Navbar1 = ({
   ],
   auth = {
     login: { text: "Log in", url: "/login" },
-    signup: { text: "Sign up", url: "/singup" }, // Updated to "/singup"
+    signup: { text: "Sign up", url: "/signup" }, // Updated to "/singup"
   },
-}: Navbar1Props) => {
+}:  Navbar1Props) => {
+  const navigate = useNavigate();
+  const isLoggedIn = localStorage.getItem("authToken");
+  const displayName = localStorage.getItem("userDisplayName") || "User";
+
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("userDisplayName");
+    navigate("/login");
+  };
+
   return (
     <section className="py-4">
       <div className="container">
@@ -161,15 +172,36 @@ const Navbar1 = ({
               </NavigationMenu>
             </div>
           </div>
-          <div className="flex gap-2">
-            <Button asChild variant="outline" size="sm">
-              <a href={auth.login.url}>{auth.login.text}</a>
-            </Button>
-            <Button asChild size="sm">
-              <a href={auth.signup.url}>{auth.signup.text}</a>
-            </Button>
+          
+          {isLoggedIn ? (
+            <div className="flex items-center gap-4">
+              <img 
+                src="/images/default-user.png"
+                className="h-8 w-8 rounded-full object-cover"
+                alt="Profile"
+              />
+              <span className="text-sm font-medium">{displayName}</span>
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={handleLogout}
+              >
+                Log out
+              </Button>
           </div>
+          ) : (
+            <div className="flex gap-2">
+              <Button asChild variant="outline" size="sm">
+                <a href={auth.login.url}>{auth.login.text}</a>
+              </Button>
+              <Button asChild size="sm">
+                <a href={auth.signup.url}>{auth.signup.text}</a>
+              </Button>
+            </div>
+          )}
         </nav>
+
+        {/* Mobile Menu */}
         <div className="block lg:hidden">
           <div className="flex items-center justify-between">
             <a href={logo.url} className="flex items-center gap-2">
@@ -215,12 +247,30 @@ const Navbar1 = ({
                     </div>
                   </div>
                   <div className="flex flex-col gap-3">
-                    <Button asChild variant="outline">
-                      <a href={auth.login.url}>{auth.login.text}</a>
-                    </Button>
-                    <Button asChild>
-                      <a href={auth.signup.url}>{auth.signup.text}</a>
-                    </Button>
+                    {isLoggedIn ? (
+                      <>
+                        <div className="flex items-center gap-3">
+                          <img 
+                            src="/images/default-user.png"
+                            className="h-8 w-8 rounded-full object-cover"
+                            alt="Profile"
+                          />
+                          <span className="text-sm font-medium">{displayName}</span>
+                        </div>
+                        <Button variant="outline" onClick={handleLogout}>
+                          Log out
+                        </Button>
+                      </>
+                    ) : (
+                      <>
+                        <Button asChild variant="outline">
+                          <a href={auth.login.url}>{auth.login.text}</a>
+                        </Button>
+                        <Button asChild>
+                          <a href={auth.signup.url}>{auth.signup.text}</a>
+                        </Button>
+                      </>
+                    )}
                   </div>
                 </div>
               </SheetContent>

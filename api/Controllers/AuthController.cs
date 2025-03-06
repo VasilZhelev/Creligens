@@ -150,7 +150,7 @@ namespace api.Controllers
                 var userRecord = await FirebaseAuth.DefaultInstance.GetUserByEmailAsync(request.Email);
                 
                 // Check if email is verified
-                if (!userRecord.EmailVerified && true)  // Set to false if you want to allow unverified emails
+                if (!userRecord.EmailVerified)  // Set to false if you want to allow unverified emails
                 {
                     return BadRequest(new { 
                         Message = "Email not verified. Please verify your email before logging in.",

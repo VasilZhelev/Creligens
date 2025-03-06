@@ -11,12 +11,20 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { Button } from "@/components/ui/button";
+import { authApi } from "@/lib/api";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
-function PasswordInput() {
+// Password Input Component
+const PasswordInput = ({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (value: string) => void;
+}) => {
   const id = useId();
-  const [isVisible, setIsVisible] = useState<boolean>(false);
-
-  const toggleVisibility = () => setIsVisible((prevState) => !prevState);
+  const [isVisible, setIsVisible] = useState(false);
 
   return (
     <div className="space-y-2 min-w-[300px]">
@@ -24,68 +32,111 @@ function PasswordInput() {
       <div className="relative">
         <Input
           id={id}
-          className="pe-9"
-          placeholder="Enter new password"
           type={isVisible ? "text" : "password"}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder="Enter new password"
+          required
+          minLength={6}
         />
         <button
-          className="absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center rounded-e-lg text-muted-foreground/80 outline-offset-2 transition-colors hover:text-foreground focus:z-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring/70 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
           type="button"
-          onClick={toggleVisibility}
-          aria-label={isVisible ? "Hide password" : "Show password"}
-          aria-pressed={isVisible}
-          aria-controls="password"
+          onClick={() => setIsVisible(!isVisible)}
+          className="absolute right-2 top-2.5"
         >
-          {isVisible ? (
-            <EyeOff size={16} strokeWidth={2} aria-hidden="true" />
-          ) : (
-            <Eye size={16} strokeWidth={2} aria-hidden="true" />
-          )}
+          {isVisible ? <EyeOff size={18} /> : <Eye size={18} />}
         </button>
       </div>
     </div>
   );
-}
+};
 
-function VerificationCodeInput() {
-  return (
-    <div className="space-y-2 flex flex-col items-center">
-      <Label htmlFor="verification-code">Verification Code</Label>
-      <InputOTP maxLength={6} id="verification-code">
-        <InputOTPGroup>
-          <InputOTPSlot index={0} />
-          <InputOTPSlot index={1} />
-          <InputOTPSlot index={2} />
-        </InputOTPGroup>
-        <InputOTPSeparator />
-        <InputOTPGroup>
-          <InputOTPSlot index={3} />
-          <InputOTPSlot index={4} />
-          <InputOTPSlot index={5} />
-        </InputOTPGroup>
-      </InputOTP>
-    </div>
-  );
-}
+// Verification Code Input Component
+const VerificationCodeInput = ({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (value: string) => void;
+}) => (
+  <div className="space-y-2 flex flex-col items-center">
+    <Label>Verification Code</Label>
+    <InputOTP maxLength={6} value={value} onChange={onChange}>
+      <InputOTPGroup>
+        {[...Array(6)].map((_, i) => (
+          <InputOTPSlot key={i} index={i} />
+        ))}
+      </InputOTPGroup>
+    </InputOTP>
+  </div>
+);
 
+// Main Component
 export function ForgotPassword() {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [resetCode, setResetCode] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      await authApi.resetPassword({ email, resetCode, newPassword });
+      toast.success("Password reset!");
+      navigate("/login");
+    } catch (error: any) {
+      toast.error(error.message || "Reset failed");
+    }
+  };
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-background p-4">
-      <div className="w-full max-w-md space-y-6">
+    <div className="flex flex-col items-center justify-center min-h-screen p-4">
+      <form onSubmit={handleSubmit} className="w-full max-w-md space-y-6">
         <div className="text-center">
-          <h1 className="text-2xl font-semibold">Forgot Password</h1>
-          <p className="text-muted-foreground">
-            Please enter the verification code sent to your email and your new password.
+          <h1 className="text-2xl font-bold">Reset Password</h1>
+          <p className="text-muted-foreground mt-2">
+            Enter the code sent to your email and new password
           </p>
         </div>
 
-        <VerificationCodeInput />
-        <PasswordInput />
+        <div className="space-y-4">
+          <div>
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="your@email.com"
+              required
+            />
+          </div>
 
-        <Button className="w-full" type="submit">
-          Reset Password
-        </Button>
-      </div>
+          <VerificationCodeInput
+            value={resetCode}
+            onChange={(val) => setResetCode(val)}
+          />
+
+          <PasswordInput
+            value={newPassword}
+            onChange={(val) => setNewPassword(val)}
+          />
+
+          <Button type="submit" className="w-full">
+            Reset Password
+          </Button>
+        </div>
+
+        <div className="text-center text-sm">
+          <Button
+            variant="link"
+            className="text-muted-foreground"
+            onClick={() => navigate("/login")}
+          >
+            Remember your password? Login
+          </Button>
+        </div>
+      </form>
     </div>
   );
 }
