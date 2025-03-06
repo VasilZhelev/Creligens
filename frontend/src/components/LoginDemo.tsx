@@ -3,6 +3,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useId } from "react";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 
 function LoginDemo() {
   const id = useId();
@@ -56,22 +57,14 @@ function LoginDemo() {
                 Remember me
               </Label>
             </div>
-            <a className="text-sm underline hover:no-underline" href="#">
+            <Link to="/forgot-password" className="text-sm underline hover:no-underline"> {/* Updated to use Link */}
               Forgot password?
-            </a>
+            </Link>
           </div>
           <Button type="submit" className="w-full">
             Sign in
           </Button>
         </form>
-
-        <div className="flex items-center gap-3 before:h-px before:flex-1 before:bg-border after:h-px after:flex-1 after:bg-border">
-          <span className="text-xs text-muted-foreground">Or</span>
-        </div>
-
-        <Button variant="outline" className="w-full">
-          Login with Google
-        </Button>
       </div>
     </div>
   );
