@@ -3,21 +3,21 @@ import { FeatureSteps } from "@/components/ui/feature-section"
 const features = [
   { 
     step: 'Step 1', 
-    title: 'Learn the Basics',
-    content: 'Start your Web3 journey by learning the basics of blockchain.', 
-    image: 'https://images.unsplash.com/photo-1723958929247-ef054b525153?q=80&w=2070&auto=format&fit=crop' 
+    title: 'Make it cheaper',
+    content: 'We can tell you the price for repair of all the broken parts.', 
+    image: 'https://www.shutterstock.com/image-photo/hand-pick-toy-car-driving-600nw-2204268921.jpg' 
   },
   { 
     step: 'Step 2',
-    title: 'Deep Dive',
-    content: 'Dive deep into blockchain fundamentals and smart contract development.',
-    image: 'https://images.unsplash.com/photo-1723931464622-b7df7c71e380?q=80&w=2070&auto=format&fit=crop'
+    title: 'Chose a car',
+    content: 'For now we work only with mobile.bg. You need only to chose a listing and place it in our website.',
+    image: 'https://media.istockphoto.com/id/1247049926/vector/a-car-passes-a-check.jpg?s=612x612&w=0&k=20&c=J-o76rm_yfMi9bkPym5u21bMZwhADZMVRbyWNczWadU='
   },
   { 
     step: 'Step 3',
-    title: 'Build Projects',
-    content: 'Graduate with hands-on Web3 experience through building decentralized applications.',
-    image: 'https://images.unsplash.com/photo-1725961476494-efa87ae3106a?q=80&w=2070&auto=format&fit=crop'
+    title: 'Find parts',
+    content: 'When we find the parts that are broken we have a big date set with many parts at the best price.',
+    image: 'https://media.tehrantimes.com/d/t/2020/07/22/3/3505433.jpg'
   },
 ]
 
@@ -25,7 +25,7 @@ export function AboutUs() {
   return (
       <FeatureSteps 
         features={features}
-        title="Your Journey Starts Here"
+        title="About us"
         autoPlayInterval={4000}
         imageHeight="h-[500px]"
       />
