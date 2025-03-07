@@ -9,7 +9,7 @@ namespace ImageProcessingApi.Controllers
     public class ImageProcessingController : ControllerBase
     {
         private readonly HttpClient _httpClient;
-        private readonly string _roboflowApiKey;
+        // private readonly string _roboflowApiKey;
         // Set your Roboflow model URL (update with your actual project/model)
         private readonly string _roboflowModelUrl = "https://detect.roboflow.com/car_damage_detection_main_-f10/1";
 
@@ -17,7 +17,7 @@ namespace ImageProcessingApi.Controllers
         public ImageProcessingController(IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
             _httpClient = httpClientFactory.CreateClient();
-            _roboflowApiKey = configuration["ROBOFLOW_API_KEY"]; // Retrieve the API key
+            // _roboflowApiKey = configuration["ROBOFLOW_API_KEY"]; // Retrieve the API key
         }
 
         // POST: api/ImageProcessing/process-images
@@ -33,7 +33,9 @@ namespace ImageProcessingApi.Controllers
 
             foreach (var imageUrl in imageUrls)
             {
-                var requestUrl = $"{_roboflowModelUrl}?api_key={_roboflowApiKey}&image={WebUtility.UrlEncode(imageUrl)}";
+                var requestUrl = $"{_roboflowModelUrl}?api_key=4R0M7mbcRfoBaegdJKDI&image={WebUtility.UrlEncode(imageUrl)}";
+                Console.WriteLine($"Requesting Roboflow API: {requestUrl}");
+                //https://detect.roboflow.com/car_damage_detection_main_-f10/1?api_key=4R0M7mbcRfoBaegdJKDI&image=https%3A%2F%2Fcdn2.focus.bg%2Fmobile%2Fphotosorg%2F785%2F1%2Fbig%2F11306754830871785_3.webp
                 try
                 {
                     var response = await _httpClient.GetAsync(requestUrl);

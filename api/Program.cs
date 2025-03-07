@@ -4,8 +4,11 @@ using Microsoft.IdentityModel.Tokens;
 using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
 using Google.Cloud.Firestore;
+using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
+
+Env.Load();
 
 // === Firebase Setup === //
 var firebaseProjectId = "creligens"; 
@@ -66,6 +69,13 @@ builder.Services.AddSingleton<IEmailService, EmailService>();
 // Example: a custom web scraping service
 builder.Services.AddSingleton<WebScraperService>();
 builder.Services.AddHttpClient();
+builder.Services.AddHttpClient<IImageProcessingService, ImageProcessingService>(client =>
+{
+    client.BaseAddress = new Uri("http://localhost:5232"); // use HTTP in development
+});
+
+
+
 
 // Add controllers.
 builder.Services.AddControllers();
@@ -116,6 +126,7 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
+
 
 var app = builder.Build();
 

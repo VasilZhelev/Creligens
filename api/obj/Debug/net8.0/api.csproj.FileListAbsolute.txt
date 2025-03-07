@@ -149,7 +149,6 @@ C:\Users\vasil\OneDrive\Coding\NOIT_Cars\Creligens\api\bin\Debug\net8.0\runtimes
 C:\Users\PC\Documents\GitHub\Creligens\api\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\PC\Documents\GitHub\Creligens\api\bin\Debug\net8.0\appsettings.json
 C:\Users\PC\Documents\GitHub\Creligens\api\bin\Debug\net8.0\out\web.config
-C:\Users\PC\Documents\GitHub\Creligens\api\bin\Debug\net8.0\creligens-firebase-adminsdk-fbsvc-42ca7744ef.json
 C:\Users\PC\Documents\GitHub\Creligens\api\bin\Debug\net8.0\out\api.deps.json
 C:\Users\PC\Documents\GitHub\Creligens\api\bin\Debug\net8.0\out\api.runtimeconfig.json
 C:\Users\PC\Documents\GitHub\Creligens\api\bin\Debug\net8.0\out\appsettings.Development.json
@@ -383,3 +382,6 @@ C:\Users\boris\Documents\GitHub\Creligens\api\obj\Debug\net8.0\refint\api.dll
 C:\Users\boris\Documents\GitHub\Creligens\api\obj\Debug\net8.0\api.pdb
 C:\Users\boris\Documents\GitHub\Creligens\api\obj\Debug\net8.0\api.genruntimeconfig.cache
 C:\Users\boris\Documents\GitHub\Creligens\api\obj\Debug\net8.0\ref\api.dll
+C:\Users\PC\Documents\GitHub\Creligens\api\bin\Debug\net8.0\SixLabors.ImageSharp.dll
+C:\Users\PC\Documents\GitHub\Creligens\api\bin\Debug\net8.0\DotNetEnv.dll
+C:\Users\PC\Documents\GitHub\Creligens\api\bin\Debug\net8.0\Sprache.dll
