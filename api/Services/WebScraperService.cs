@@ -28,24 +28,23 @@ namespace api.Services
                 var htmlDoc = new HtmlDocument();
                 htmlDoc.LoadHtml(html);
 
-                // --- Title Extraction ---
+                // Extracting title
                 var h1Node = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='obTitle']//h1");
                 string title = h1Node?.FirstChild?.InnerText?.Trim() ?? "No title found";
 
-                // --- Year Extraction ---
+                // Extracting year
                 var yearNode = htmlDoc.DocumentNode.SelectSingleNode("//div[contains(@class, 'proizvodstvo')]/div[@class='mpInfo']");
                 string yearText = yearNode?.InnerText ?? "No year found";
                 var yearMatch = Regex.Match(yearText, @"\b(19|20)\d{2}\b");
                 yearText = yearMatch.Success ? yearMatch.Value : "Unknown Year";
 
-                // --- Price Extraction ---
+                // Extracting price
                 var priceNode = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='Price']");
                 string priceText = priceNode?.InnerText ?? "No price found";
-                // Use a regex that matches digits and spaces (e.g., "20 000"), then remove spaces.
                 var priceMatch = Regex.Match(priceText, @"(\d[\d\s]*)");
                 priceText = priceMatch.Success ? priceMatch.Groups[1].Value.Replace(" ", "") : "Unknown Price";
 
-                // --- Photo URLs Extraction ---
+                // Extracting image URLs
                 var photoUrls = new List<string>();
                 var photoNodes = htmlDoc.DocumentNode.SelectNodes("//div[@id='owlcarousel']//img[contains(@class, 'carouselimg')]");
                 if (photoNodes != null)
@@ -64,6 +63,13 @@ namespace api.Services
                     }
                 }
 
+                // LOGGING IMAGES FOR DEBUGGING
+                Console.WriteLine($"Scraped {photoUrls.Count} images from {url}");
+                foreach (var img in photoUrls)
+                {
+                    Console.WriteLine($"Image URL: {img}");
+                }
+
                 return new ScrapedData
                 {
                     Title = title,
@@ -79,6 +85,7 @@ namespace api.Services
                 throw new Exception("Error scraping the page", ex);
             }
         }
+
 
         public async Task SaveDataToJsonAsync(ScrapedData data, string filePath)
         {

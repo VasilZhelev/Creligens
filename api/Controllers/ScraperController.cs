@@ -18,7 +18,6 @@ namespace api.Controllers
         }
 
         [HttpGet("scrape")]
-        [Authorize]
         public async Task<IActionResult> Scrape([FromQuery] string url)
         {
             if (string.IsNullOrWhiteSpace(url))
