@@ -24,3 +24,6 @@ export const authApi = {
   resetPassword: (data: { email: string; resetCode: string; newPassword: string }) =>
     api.post('/auth/reset-password', data),
 };
+
+// Export the api instance as default
+export default api;

@@ -9,7 +9,7 @@ namespace ImageProcessingApi.Controllers
     public class ImageProcessingController : ControllerBase
     {
         private readonly HttpClient _httpClient;
-        private readonly string _roboflowApiKey;
+        // private readonly string _roboflowApiKey;
         // Set your Roboflow model URL (update with your actual project/model)
         private readonly string _roboflowModelUrl = "https://detect.roboflow.com/car_damage_detection_main_-f10/1";
 
@@ -17,7 +17,7 @@ namespace ImageProcessingApi.Controllers
         public ImageProcessingController(IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
             _httpClient = httpClientFactory.CreateClient();
-            _roboflowApiKey = configuration["ROBOFLOW_API_KEY"]; // Retrieve the API key
+            // _roboflowApiKey = configuration["ROBOFLOW_API_KEY"]; // Retrieve the API key
         }
 
         // POST: api/ImageProcessing/process-images
