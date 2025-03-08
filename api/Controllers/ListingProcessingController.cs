@@ -2,7 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using api.Services;  // Import types from the services
+using api.Services;
+using Microsoft.AspNetCore.Authorization;  // Import types from the services
 
 namespace api.Controllers
 {
@@ -16,15 +17,15 @@ namespace api.Controllers
         // Hard-coded demo repair prices for known broken parts:
         private readonly Dictionary<string, decimal> _repairPrices = new Dictionary<string, decimal>
         {
-            { "Broken_front_bumper", 250 },
-            { "Broken_front_left_door", 300 },
-            { "Broken_front_right_bumper", 250 },
-            { "Broken_front_right_door", 300 },
-            { "Broken_headlight", 150 },
-            { "Broken_hood", 400 },
-            { "Broken_left_front_bumper", 275 },
-            { "Broken_rear_left_door", 350 },
-            { "Broken_rear_right_door", 350 }
+            { "Broken_front_bumper", 659.99m },
+            { "Broken_front_left_door", 815.30m },
+            { "Broken_front_right_bumper", 237.11m },
+            { "Broken_front_right_door", 815.30m },
+            { "Broken_headlight", 2450.50m},
+            { "Broken_hood", 661.50m },
+            { "Broken_left_front_bumper", 237.11m },
+            { "Broken_rear_left_door", 775.30m },
+            { "Broken_rear_right_door", 775.30m }
         };
 
         public ListingProcessingController(WebScraperService scraperService, IImageProcessingService imageProcessingService)
@@ -34,6 +35,7 @@ namespace api.Controllers
         }
 
         [HttpPost("process-listing")]
+        // [Authorize]
         public async Task<IActionResult> ProcessListing([FromBody] ListingRequest request)
         {
             if (string.IsNullOrWhiteSpace(request.Url))
