@@ -76,13 +76,15 @@ namespace api.Controllers
             decimal totalRepairCost = brokenParts.Sum(bp => bp.RepairCost);
 
             // Build the composite response.
+            // Build the composite response.
             ListingProcessingResponse response = new ListingProcessingResponse
             {
                 CarTitle = scrapedData.Title,
                 Year = scrapedData.Year,
-                Price = scrapedData.Price,  // Price remains a string as scraped
+                Price = scrapedData.Price,
                 BrokenParts = brokenParts,
-                TotalRepairCost = totalRepairCost
+                TotalRepairCost = totalRepairCost,
+                PhotoUrls = scrapedData.PhotoUrls // Add this line
             };
 
             return Ok(response);
@@ -97,13 +99,14 @@ namespace api.Controllers
 
     // Composite response returned to the frontend.
     public class ListingProcessingResponse
-    {
-        public string CarTitle { get; set; }
-        public string Year { get; set; }
-        public string Price { get; set; }
-        public List<BrokenPartResult> BrokenParts { get; set; }
-        public decimal TotalRepairCost { get; set; }
-    }
+{
+    public string CarTitle { get; set; }
+    public string Year { get; set; }
+    public string Price { get; set; }
+    public List<BrokenPartResult> BrokenParts { get; set; }
+    public decimal TotalRepairCost { get; set; }
+    public List<string> PhotoUrls { get; set; } // Add this line
+}
 
     // Represents each broken part and its estimated repair cost.
     public class BrokenPartResult
