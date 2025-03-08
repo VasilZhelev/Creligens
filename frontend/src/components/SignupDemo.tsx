@@ -17,11 +17,18 @@ function SignupDemo() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await authApi.signUp({ email, password, displayName: name });
-      toast.success("Verification email sent!");
-      navigate(`/verify-email?email=${encodeURIComponent(email)}`);
+      const response = await authApi.signUp({
+        email,
+        password,
+        displayName: name,
+      });
+      if (response.status === 200) {
+        toast.success("Verification email sent!");
+        navigate(`/verify-email?email=${encodeURIComponent(email)}`);
+      }
     } catch (error: any) {
       toast.error(error.message || "Signup failed");
+      console.error("Signup error:", error); // Add debug logging
     }
   };
 
@@ -56,11 +63,24 @@ function SignupDemo() {
           <div className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor={`${id}-name`}>Full name</Label>
-              <Input id={`${id}-name`} value={name} onChange={(e) => setName(e.target.value)} placeholder="John Doe" required />
+              <Input
+                id={`${id}-name`}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="John Doe"
+                required
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor={`${id}-email`}>Email</Label>
-              <Input id={`${id}-email`} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="hi@yourcompany.com" type="email" required />
+              <Input
+                id={`${id}-email`}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="hi@yourcompany.com"
+                type="email"
+                required
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor={`${id}-password`}>Password</Label>

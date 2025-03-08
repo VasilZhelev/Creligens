@@ -340,6 +340,21 @@ namespace api.Controllers
             }
         }
 
+        [HttpPost("test-email")]
+        public async Task<IActionResult> TestEmail([FromBody] string email)
+        {
+            try
+            {
+                await _emailService.SendVerificationEmail(email, "123456");
+                return Ok(new { Message = "Test email sent!" });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Test email failed");
+                return StatusCode(500, new { Message = "Failed to send test email" });
+            }
+        }
+
         // Helper method to generate a verification code
         private string GenerateVerificationCode()
         {

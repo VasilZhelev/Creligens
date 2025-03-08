@@ -29,12 +29,11 @@ namespace api.Services
             _configuration = configuration;
             
             // Load configuration
-            _fromEmail = _configuration["Email:FromAddress"];
-            _smtpHost = _configuration["Email:SmtpHost"];
-            _smtpPort = int.Parse(_configuration["Email:SmtpPort"]);
-            _smtpUsername = _configuration["Email:SmtpUsername"];
-            _smtpPassword = _configuration["Email:SmtpPassword"];
-            _applicationUrl = _configuration["ApplicationUrl"];
+            _fromEmail = "creligens.support@proton.me";
+            _smtpHost = "smtp.sendgrid.net";
+            _smtpPort = 587; // Use 465 if 587 fails
+            _smtpUsername = "apikey"; // Always "apikey" for SendGrid
+            _smtpPassword = "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";
         }
 
         public async Task SendVerificationEmail(string email, string verificationCode)
@@ -134,16 +133,16 @@ namespace api.Services
 
                 using (var client = new SmtpClient(_smtpHost, _smtpPort))
                 {
-                    client.EnableSsl = true;
+                    client.EnableSsl = true;  // Enable SSL/TLS
                     client.UseDefaultCredentials = false;
                     client.Credentials = new NetworkCredential(_smtpUsername, _smtpPassword);
-                    
+
                     await client.SendMailAsync(message);
                 }
 
                 _logger.LogInformation($"Email sent to {toEmail} with subject '{subject}'");
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError(ex, $"Failed to send email to {toEmail} with subject '{subject}'");
                 throw;

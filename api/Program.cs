@@ -9,6 +9,7 @@ using DotNetEnv;
 var builder = WebApplication.CreateBuilder(args);
 
 Env.Load();
+Console.WriteLine("SMTP Host: " + Environment.GetEnvironmentVariable("Email:SmtpHost"));
 
 // === Firebase Setup === //
 var firebaseProjectId = "creligens"; 
@@ -64,7 +65,12 @@ builder.Services.AddSingleton(provider => FirestoreDb.Create(firebaseProjectId))
 
 // === Register Additional Services ===
 // Email Service
-builder.Services.AddSingleton<IEmailService, EmailService>();
+builder.Services.AddSingleton<IEmailService>(provider =>
+{
+    var logger = provider.GetRequiredService<ILogger<EmailService>>();
+    var configuration = provider.GetRequiredService<IConfiguration>();
+    return new EmailService(logger, configuration);
+});
 
 // Example: a custom web scraping service
 builder.Services.AddSingleton<WebScraperService>();
