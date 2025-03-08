@@ -1,4 +1,6 @@
-import { Book, Menu, Sunset, Trees, Zap } from "lucide-react";
+"use client";
+
+import { Book, Menu, Image, Cog, Zap } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -57,81 +59,42 @@ interface Navbar1Props {
 
 const Navbar1 = ({
   logo = {
-    url: "https://www.shadcnblocks.com",
-    src: "/Smart (2) (1) (1).png",
+    url: "",
+    src: "/Smart (4) (1).png",
     alt: "logo",
     title: "",
   },
   menu = [
     { title: "Home", url: "#" },
     {
-      title: "Products",
+      title: "Services",
       url: "#",
       items: [
         {
-          title: "Blog",
-          description: "The latest industry news, updates, and info",
+          title: "Price",
+          description: "We show you the repair price for the car.",
           icon: <Book className="size-5 shrink-0" />,
           url: "#",
         },
         {
-          title: "Company",
-          description: "Our mission is to innovate and empower the world",
-          icon: <Trees className="size-5 shrink-0" />,
+          title: "Parts",
+          description: "We have profed parts vendors at the best price.",
+          icon: <Cog className="size-5 shrink-0" />,
           url: "#",
         },
         {
-          title: "Careers",
-          description: "Browse job listing and discover our workspace",
-          icon: <Sunset className="size-5 shrink-0" />,
+          title: "Photos",
+          description: "We gave precise photos of every broken part of the car",
+          icon: <Image className="size-5 shrink-0" />,
           url: "#",
         },
         {
           title: "Support",
-          description:
-            "Get in touch with our support team or visit our community forums",
+          description: "We offer feast and effective 24/7 support.",
           icon: <Zap className="size-5 shrink-0" />,
           url: "#",
         },
       ],
-    },
-    {
-      title: "Resources",
-      url: "#",
-      items: [
-        {
-          title: "Help Center",
-          description: "Get all the answers you need right here",
-          icon: <Zap className="size-5 shrink-0" />,
-          url: "#",
-        },
-        {
-          title: "Contact Us",
-          description: "We are here to help you with any questions you have",
-          icon: <Sunset className="size-5 shrink-0" />,
-          url: "#",
-        },
-        {
-          title: "Status",
-          description: "Check the current status of our services and APIs",
-          icon: <Trees className="size-5 shrink-0" />,
-          url: "#",
-        },
-        {
-          title: "Terms of Service",
-          description: "Our terms and conditions for using our services",
-          icon: <Book className="size-5 shrink-0" />,
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Pricing",
-      url: "#",
-    },
-    {
-      title: "Blog",
-      url: "#",
     },
   ],
   mobileExtraLinks = [
@@ -142,9 +105,9 @@ const Navbar1 = ({
   ],
   auth = {
     login: { text: "Log in", url: "/login" },
-    signup: { text: "Sign up", url: "/signup" }, // Updated to "/singup"
+    signup: { text: "Sign up", url: "/signup" },
   },
-}:  Navbar1Props) => {
+}: Navbar1Props) => {
   const navigate = useNavigate();
   const isLoggedIn = localStorage.getItem("authToken");
   const displayName = localStorage.getItem("userDisplayName") || "User";
@@ -158,7 +121,7 @@ const Navbar1 = ({
   return (
     <section className="py-4">
       <div className="container">
-        <nav className="hidden justify-between lg:flex">
+        <nav className="hidden justify-between lg:flex z-50"> {/* Add z-50 here */}
           <div className="flex items-center gap-6">
             <a href={logo.url} className="flex items-center gap-2">
               <img src={logo.src} className="w-32" alt={logo.alt} />
@@ -188,7 +151,7 @@ const Navbar1 = ({
               >
                 Log out
               </Button>
-          </div>
+            </div>
           ) : (
             <div className="flex gap-2">
               <Button asChild variant="outline" size="sm">
@@ -202,7 +165,7 @@ const Navbar1 = ({
         </nav>
 
         {/* Mobile Menu */}
-        <div className="block lg:hidden">
+        <div className="block lg:hidden z-50"> {/* Add z-50 here */}
           <div className="flex items-center justify-between">
             <a href={logo.url} className="flex items-center gap-2">
               <img src={logo.src} className="w-32" alt={logo.alt} />

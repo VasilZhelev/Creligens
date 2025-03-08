@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
+import { WavyBackground } from "@/components/ui/wavy-background"; // Import the WavyBackground component
 
 export function TextLink() {
   const [inputValue, setInputValue] = useState("");
@@ -41,33 +42,35 @@ export function TextLink() {
   };
 
   return (
-    <div className="h-[40rem] flex flex-col justify-center items-center px-4">
-      <h2 className="mb-10 sm:mb-20 text-xl text-center sm:text-5xl dark:text-white text-black">
-        We can help you choose a car!
-      </h2>
-      <div className="w-full max-w-xl">
-        <PlaceholdersAndVanishInput
-          placeholders={placeholders}
-          onChange={handleChange}
-          onSubmit={onSubmit}
-          value={inputValue}
-        />
+    <WavyBackground>
+      <div className="h-[40rem] flex flex-col justify-center items-center px-4">
+        <h2 className="mb-10 sm:mb-20 text-xl text-center sm:text-5xl dark:text-white text-black">
+          We can help you choose a car!
+        </h2>
+        <div className="w-full max-w-xl">
+          <PlaceholdersAndVanishInput
+            placeholders={placeholders}
+            onChange={handleChange}
+            onSubmit={onSubmit}
+            value={inputValue}
+          />
 
-        {error && <div className="mt-2 text-red-500 text-sm">{error}</div>}
+          {error && <div className="mt-2 text-red-500 text-sm">{error}</div>}
 
-        <div className="mt-6 text-center">
-          <p className="text-gray-600 dark:text-gray-400">
-            Paste a mobile.bg car listing URL and we'll analyze the car's
-            condition and estimate repair costs.
-          </p>
-        </div>
-
-        {isLoading && (
-          <div className="mt-4 flex justify-center">
-            <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+          <div className="mt-6 text-center">
+            <p className="text-gray-600 dark:text-gray-400">
+              Paste a mobile.bg car listing URL and we'll analyze the car's
+              condition and estimate repair costs.
+            </p>
           </div>
-        )}
+
+          {isLoading && (
+            <div className="mt-4 flex justify-center">
+              <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </WavyBackground>
   );
 }
