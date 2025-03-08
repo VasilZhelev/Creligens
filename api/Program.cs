@@ -69,9 +69,11 @@ builder.Services.AddSingleton<IEmailService, EmailService>();
 // Example: a custom web scraping service
 builder.Services.AddSingleton<WebScraperService>();
 builder.Services.AddHttpClient();
+
+var imageProcessingBaseUrl = Environment.GetEnvironmentVariable("IMAGE_PROCESSING_BASE_URL") ?? "http://localhost:5232";
 builder.Services.AddHttpClient<IImageProcessingService, ImageProcessingService>(client =>
 {
-    client.BaseAddress = new Uri("http://localhost:5232"); // use HTTP in development
+    client.BaseAddress = new Uri(imageProcessingBaseUrl);
 });
 
 
