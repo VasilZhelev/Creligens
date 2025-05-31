@@ -62,12 +62,16 @@ namespace api.Controllers
                 {
                     foreach (var prediction in imgResult.Data.Predictions)
                     {
-                        if (prediction.Class.StartsWith("Broken_") && _repairPrices.ContainsKey(prediction.Class))
+                        if (prediction.Class.StartsWith("Broken_"))
                         {
+                            decimal repairCost = _repairPrices.ContainsKey(prediction.Class)
+                                ? _repairPrices[prediction.Class]
+                                : 0; // Default to 0 if the part is not in the dictionary
+
                             brokenParts.Add(new BrokenPartResult
                             {
                                 PartName = prediction.Class,
-                                RepairCost = _repairPrices[prediction.Class],
+                                RepairCost = repairCost,
                                 Confidence = prediction.Confidence
                             });
                         }
@@ -77,7 +81,6 @@ namespace api.Controllers
 
             decimal totalRepairCost = brokenParts.Sum(bp => bp.RepairCost);
 
-            // Build the composite response.
             // Build the composite response.
             ListingProcessingResponse response = new ListingProcessingResponse
             {
@@ -91,7 +94,7 @@ namespace api.Controllers
 
             return Ok(response);
         }
-    }
+    }   
 
     // Request model for processing a listing.
     public class ListingRequest
@@ -101,14 +104,14 @@ namespace api.Controllers
 
     // Composite response returned to the frontend.
     public class ListingProcessingResponse
-{
-    public string CarTitle { get; set; }
-    public string Year { get; set; }
-    public string Price { get; set; }
-    public List<BrokenPartResult> BrokenParts { get; set; }
-    public decimal TotalRepairCost { get; set; }
-    public List<string> PhotoUrls { get; set; } // Add this line
-}
+    {
+        public string CarTitle { get; set; }
+        public string Year { get; set; }
+        public string Price { get; set; }
+        public List<BrokenPartResult> BrokenParts { get; set; }
+        public decimal TotalRepairCost { get; set; }
+        public List<string> PhotoUrls { get; set; } // Add this line
+    }
 
     // Represents each broken part and its estimated repair cost.
     public class BrokenPartResult

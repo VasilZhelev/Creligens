@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5232/api',
+  baseURL: 'https://creligens.onrender.com/api',
+  // baseURL: import.meta.env.VITE_API_URL || 'https://creligens.onrender.com/',
 });
 
 // Add error handling interceptor

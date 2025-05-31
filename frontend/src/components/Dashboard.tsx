@@ -218,7 +218,7 @@ const Dashboard = () => {
                     Price
                   </span>
                   <span className="font-semibold text-lg text-gray-900 dark:text-white">
-                    {listingData.price} €
+                    {listingData.price} лв
                   </span>
                 </div>
                 <div className="p-3 bg-red-50 dark:bg-red-900/20 rounded-lg col-span-2 md:col-span-1">
@@ -226,7 +226,7 @@ const Dashboard = () => {
                     Repair Cost
                   </span>
                   <span className="font-semibold text-lg text-red-600 dark:text-red-400">
-                    {correctedTotalCost} €
+                    {correctedTotalCost} лв
                   </span>
                 </div>
               </div>
@@ -235,7 +235,7 @@ const Dashboard = () => {
                   Value After Repairs
                 </span>
                 <span className="font-semibold text-lg text-green-600 dark:text-green-400">
-                  {parsedCarPrice - correctedTotalCost} €
+                  {parsedCarPrice - correctedTotalCost} лв
                 </span>
               </div>
             </div>
@@ -313,7 +313,7 @@ const Dashboard = () => {
                     Repair Cost
                   </span>
                   <span className="font-bold text-xl text-red-600 dark:text-red-400">
-                    {part.repairCost} €
+                    {part.repairCost} лв
                   </span>
                 </div>
               </div>
@@ -328,7 +328,7 @@ const Dashboard = () => {
               Total Estimated Repair Cost
             </h3>
             <span className="text-3xl font-bold text-blue-600 dark:text-blue-400">
-              {correctedTotalCost} €
+              {correctedTotalCost} лв
             </span>
           </div>
           <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm">

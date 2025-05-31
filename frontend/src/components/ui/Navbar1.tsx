@@ -29,7 +29,7 @@ interface MenuItem {
   title: string;
   url: string;
   description?: string;
-  icon?: JSX.Element;
+  icon?: React.ReactNode;
   items?: MenuItem[];
 }
 
@@ -119,7 +119,7 @@ const Navbar1 = ({
   };
 
   return (
-    <section className="py-4">
+    <section className="p-8">
       <div className="container">
         <nav className="hidden justify-between lg:flex z-50"> {/* Add z-50 here */}
           <div className="flex items-center gap-6">

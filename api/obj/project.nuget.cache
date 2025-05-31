@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "cgqQwWpuMGs=",
+  "dgSpecHash": "EyDjuHnrmY4=",
   "success": true,
   "projectFilePath": "C:\\Users\\PC\\Documents\\GitHub\\Creligens\\api\\api.csproj",
   "expectedPackageFiles": [
@@ -129,21 +129,17 @@
     "C:\\Users\\PC\\.nuget\\packages\\system.threading.timer\\4.3.0\\system.threading.timer.4.3.0.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\PC\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.13\\microsoft.aspnetcore.app.ref.8.0.13.nupkg.sha512",
-    "C:\\Users\\PC\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.13\\microsoft.netcore.app.host.win-x64.8.0.13.nupkg.sha512",
-    "C:\\Users\\PC\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.13\\microsoft.netcore.app.ref.8.0.13.nupkg.sha512",
-    "C:\\Users\\PC\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.13\\microsoft.windowsdesktop.app.ref.8.0.13.nupkg.sha512"
+    "C:\\Users\\PC\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.14\\microsoft.netcore.app.ref.8.0.14.nupkg.sha512",
+    "C:\\Users\\PC\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.14\\microsoft.windowsdesktop.app.ref.8.0.14.nupkg.sha512",
+    "C:\\Users\\PC\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.14\\microsoft.aspnetcore.app.ref.8.0.14.nupkg.sha512",
+    "C:\\Users\\PC\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.14\\microsoft.netcore.app.host.win-x64.8.0.14.nupkg.sha512"
   ],
   "logs": [
     {
-      "code": "NU1903",
+      "code": "NU1900",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'SixLabors.ImageSharp' 3.1.6 has a known high severity vulnerability, https://github.com/advisories/GHSA-2cmq-823j-5qj8",
-      "libraryId": "SixLabors.ImageSharp",
-      "targetGraphs": [
-        "net8.0"
-      ]
+      "message": "Error occurred while getting package vulnerability data: An error occurred while sending the request."
     }
   ]
 }
