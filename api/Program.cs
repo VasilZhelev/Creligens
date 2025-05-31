@@ -28,12 +28,12 @@ if (!string.IsNullOrEmpty(firebaseServiceAccountJson))
 else
 {
     // Fallback: load credentials from a file (for local development).
-    var serviceAccountPath = Environment.GetEnvironmentVariable("FIREBASE_SERVICE_ACCOUNT_PATH");
+    var serviceAccountPath = Environment.GetEnvironmentVariable("FIREBASE_SERVICE_ACCOUNT_JSON");
     if (!string.IsNullOrEmpty(serviceAccountPath))
     {
         FirebaseApp.Create(new AppOptions
         {
-            Credential = GoogleCredential.FromFile(serviceAccountPath)
+            Credential = GoogleCredential.FromJson(serviceAccountPath)
         });
     }
     else
